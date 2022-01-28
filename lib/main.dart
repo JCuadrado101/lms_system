@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lms_system/models/explore/courseDetail.dart';
+import 'package:lms_system/models/explore/courseEnroll.dart';
 import 'package:lms_system/models/global/settings.dart';
 import 'models/homePage/homePage.dart';
 
@@ -41,10 +43,32 @@ class LmsSystem extends StatelessWidget {
             );
           }
       ),
+      GoRoute(
+          name: 'courseDetail',
+          path: '/courseDetail',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: CourseDetail(extra: state.extra),
+            );
+          }
+      ),
+      GoRoute(
+          name: 'courseEnroll',
+          path: '/courseEnroll',
+          pageBuilder: (context, state) {
+            return MaterialPage(
+              key: state.pageKey,
+              child: CourseEnroll(extra: state.extra),
+            );
+          }
+      ),
     ],
     errorPageBuilder: (context, state) => MaterialPage(
       key: state.pageKey,
-      child: const Text('Error'),
+      child: Scaffold(
+        body: Center(child: Text(state.error.toString()))
+      ),
     ),
   );
 }

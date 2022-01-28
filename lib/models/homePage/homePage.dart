@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../account/historyScreen.dart';
-import '../courses/courses_screen.dart';
+import '../activeCourses/activeCourses.dart';
 import '../explore/exploreScreen.dart';
 import '../messageBoard/messageBoard.dart';
 
@@ -15,7 +15,7 @@ class _HomePageState extends State<HomePage> {
   int _selectedIndex = 1;
   static const List<Widget> _widgetOptions = <Widget>[
     ExploreScreen(),
-    CourseScreen(),
+    ActiveCourses(),
     MessageBoard(),
     HistoryScreen(),
   ];

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lottie/lottie.dart';
 
-class CourseScreen extends StatelessWidget {
-  const CourseScreen({Key? key}) : super(key: key);
+class ActiveCourses extends StatelessWidget {
+  const ActiveCourses({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

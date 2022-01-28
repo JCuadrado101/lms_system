@@ -83,6 +83,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.0.4"
+  flutter_rating_stars:
+    dependency: "direct main"
+    description:
+      name: flutter_rating_stars
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.3+4"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -164,12 +171,19 @@ packages:
     source: hosted
     version: "1.8.1"
   path_to_regexp:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: path_to_regexp
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.4.0"
+  readmore:
+    dependency: "direct main"
+    description:
+      name: readmore
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.1.0"
   sky_engine:
     dependency: transitive
     description: flutter
