@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lms_system/models/explore/widgets/courseDescriptions.dart';
-import 'package:lms_system/models/explore/widgets/enrollCourse.dart';
-import 'package:lms_system/models/explore/widgets/rating.dart';
-import 'package:lms_system/models/explore/widgets/readMoreText.dart';
+import 'package:lms_system/screens/explore/widgets/courseDescriptions.dart';
+import 'package:lms_system/screens/explore/widgets/enrollCourse.dart';
+import 'package:lms_system/screens/explore/widgets/rating.dart';
+import 'package:lms_system/screens/explore/widgets/readMoreText.dart';
 
 class CourseDetail extends StatelessWidget {
   final Object? extra;

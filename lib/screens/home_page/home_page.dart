@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import '../account/historyScreen.dart';
-import '../activeCourses/activeCourses.dart';
+import '../active_courses/active_courses.dart';
 import '../explore/exploreScreen.dart';
-import '../messageBoard/messageBoard.dart';
+import '../message_board/message_board.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);

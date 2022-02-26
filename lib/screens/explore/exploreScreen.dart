@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lms_system/models/explore/widgets/selectCourses.dart';
+import 'package:lms_system/screens/explore/widgets/selectCourses.dart';
 
 class ExploreScreen extends StatelessWidget {
   const ExploreScreen({Key? key}) : super(key: key);
