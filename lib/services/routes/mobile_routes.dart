@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import '../../screens/authentication/controller/authentication.dart';
 import '../../screens/explore/courseDetail.dart';
 import '../../screens/explore/courseEnroll.dart';
-import '../../screens/global/settings.dart';
+import '../../screens/shared/settings.dart';
 import '../../screens/home_page/home_page.dart';
 
 

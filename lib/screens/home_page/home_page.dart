@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../account/historyScreen.dart';
+import '../history_screen//history_screen.dart';
 import '../active_courses/active_courses.dart';
 import '../explore/exploreScreen.dart';
 import '../message_board/message_board.dart';

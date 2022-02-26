@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
 
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
@@ -23,8 +25,14 @@ class Settings extends StatelessWidget {
           ),
           backgroundColor: Colors.white,
         ),
-        body: const Center(
-          child: Text('Explore'),
+        body: Center(
+          child: ElevatedButton(
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              context.pushNamed('auth');
+            },
+            child: const Text('Sign Out'),
+          ),
         ),
       ),
     );
