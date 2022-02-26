@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import '../../screens/authentication/controller/authentication.dart';
 import '../../screens/explore/courseDetail.dart';
 import '../../screens/explore/courseEnroll.dart';
 import '../../screens/global/settings.dart';
@@ -9,15 +10,15 @@ import '../../screens/home_page/home_page.dart';
 List<GoRoute> mobileBasedRoutes() {
   return [
     GoRoute(
-      path: '/auth',
+      path: '/',
       name: 'auth',
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
-        child: const HomePage(),
+        child: const Authentication(),
       ),
     ),
     GoRoute(
-      path: '/',
+      path: '/home',
       name: 'home',
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,

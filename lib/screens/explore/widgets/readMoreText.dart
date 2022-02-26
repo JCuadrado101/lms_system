@@ -26,6 +26,6 @@ class ReadMore extends StatelessWidget {
           color: Colors.blue[700],
         ),
       ),
-    );;
+    );
   }
 }
