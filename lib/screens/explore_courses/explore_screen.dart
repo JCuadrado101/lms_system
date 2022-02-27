@@ -10,17 +10,6 @@ class ExploreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     CollectionReference courses = FirebaseFirestore.instance.collection('courses');
-
-
-    print(FirebaseFirestore.instance
-        .collection('courses')
-        .get()
-        .then((QuerySnapshot querySnapshot) {
-      querySnapshot.docs.forEach((doc) {
-        print(doc.data());
-      });
-    }));
-
     return Scaffold(
       appBar: AppBar(
         title: const Text(
@@ -44,56 +33,37 @@ class ExploreScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: FutureBuilder<DocumentSnapshot>(
-        future: courses.doc('WaQ8fXIIqTsxomIwYeq3').get(),
-        builder: (BuildContext context, AsyncSnapshot<DocumentSnapshot> snapshot) {
-          Map<String, dynamic> data = snapshot.data?.data() as Map<String, dynamic>;
-
+      body: FutureBuilder<QuerySnapshot>(
+        future: courses.get(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          final data = snapshot.data?.docs;
           if (snapshot.hasError) {
             return const Text("Something went wrong");
           }
-
-          if (snapshot.hasData && !snapshot.data!.exists) {
-            return const Text("Document does not exist");
+          if (!snapshot.hasError && snapshot.hasData) {
+            return ListView.builder(
+              shrinkWrap: true,
+              itemCount: data?.length,
+              itemBuilder: (context, index) {
+                return Row(
+                  children: [
+                    SelectCourses(
+                      imageLocation: data?[index]['image']!,
+                      title: data?[index]['title'],
+                      rating: data?[index]['rating'],
+                      count: data?[index]['count'],
+                      description: data?[index]['description'],
+                      offerBy: data?[index]['offerBy'],
+                      price: data?[index]['price'],
+                      inPersonTime: data?[index]['inPersonTime'],
+                      goRouteName: 'courseDetail',
+                    ),
+                  ]
+                );
+              },
+            );
           }
-
-          if (snapshot.connectionState == ConnectionState.done) {
-           return ListView.builder(
-             itemCount: data['description'].length,
-             itemBuilder: (context, index) {
-               return Wrap(
-                     children: [
-                       SelectCourses(
-                         imageLocation: data['image'].toString(),
-                         title: data['title'].toString(),
-                         rating: data['rating'],
-                         count: data['count'],
-                         description: data['description'],
-                         offerBy: data['offerBy'],
-                         price: data['price'],
-                         inPersonTime: data['inPersonTime'],
-                         goRouteName: 'courseDetail',
-                       ),
-                     //   SelectCourses(
-                     //     imageLocation: 'assets/StakingU.png',
-                     //     title: 'Staking University Locator Training',
-                     //     rating: '4.5',
-                     //     count: '1.2k',
-                     //     description: "The Staking University Utility Locator Training is designed to aid locators in developing: Superior troubleshooting techniques, Skills to consistently provide accurate and complete utility location informationA mastery of locating equipment, Skills required to pass Staking U’s locator, certification test",
-                     //     offerBy: 'Staking U',
-                     //     price: '\$75',
-                     //     inPersonTime: 'Feb 28',
-                     //     goRouteName: 'courseDetail',
-                     //   ),
-                     // ]
-               ]
-                 );
-             },
-           );
-
-          }
-
-          return Text("loading");
+          return const Center(child: CircularProgressIndicator());
         },
       ),
     );
