@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_system/screens/course_detail/widgets/course_descriptions.dart';
-import 'package:lms_system/screens/explore_courses/widgets/enroll_course.dart';
+import 'package:lms_system/screens/course_enroll/widgets/enroll_course.dart';
 import 'package:lms_system/screens/shared/rating.dart';
 import 'package:lms_system/screens/shared/read_more_text.dart';
 

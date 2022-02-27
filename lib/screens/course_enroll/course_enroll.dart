@@ -37,7 +37,7 @@ class CourseEnroll extends StatelessWidget {
                     color: Colors.grey,
                     image: DecorationImage(
                         opacity: 0.2,
-                        image: AssetImage('${extra['extra']['imageLocation']}'),
+                        image: NetworkImage('${extra['extra']['imageLocation']}'),
                         fit: BoxFit.cover
                     )
                 ),
