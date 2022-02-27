@@ -46,6 +46,7 @@ class ExploreScreen extends StatelessWidget {
               itemCount: data?.length,
               itemBuilder: (context, index) {
                 return Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SelectCourses(
                       imageLocation: data?[index]['image']!,
@@ -58,7 +59,7 @@ class ExploreScreen extends StatelessWidget {
                       inPersonTime: data?[index]['inPersonTime'],
                       goRouteName: 'courseDetail',
                     ),
-                  ]
+                  ],
                 );
               },
             );
