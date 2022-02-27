@@ -17,6 +17,7 @@ class Authentication extends StatelessWidget {
         // User is not signed in
         if (!snapshot.hasData) {
           return SignInScreen(
+            showAuthActionSwitch: false,
               headerBuilder: (context, constraints, _) {
                 return Padding(
                   padding: const EdgeInsets.all(20),
@@ -28,14 +29,9 @@ class Authentication extends StatelessWidget {
               },
               providerConfigs: const [
                 EmailProviderConfiguration(),
-                PhoneProviderConfiguration(),
-                GoogleProviderConfiguration(
-                  clientId: '...',
-                ),
               ]
           );
         }
-
         return const HomePage();
       },
     );
