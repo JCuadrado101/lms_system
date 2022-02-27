@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lms_system/screens/explore_courses/explore_screen.dart';
 import '../../screens/authentication/controller/authentication.dart';
-import '../../screens/explore/courseDetail.dart';
-import '../../screens/explore/courseEnroll.dart';
+import '../../screens/course_detail/course_detail.dart';
+import '../../screens/course_enroll/course_enroll.dart';
 import '../../screens/shared/settings.dart';
 import '../../screens/home_page/home_page.dart';
 
@@ -31,6 +32,14 @@ List<GoRoute> mobileBasedRoutes() {
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
         child: const Settings(),
+      ),
+    ),
+    GoRoute(
+      name: 'exploreCourses',
+      path: '/exploreCourses',
+      pageBuilder: (context, state) => MaterialPage(
+        key: state.pageKey,
+        child: ExploreScreen(),
       ),
     ),
     GoRoute(

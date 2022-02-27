@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
-import 'package:lms_system/screens/explore/widgets/courseDescriptions.dart';
-import 'package:lms_system/screens/explore/widgets/enrollCourse.dart';
-import 'package:lms_system/screens/explore/widgets/rating.dart';
-import 'package:lms_system/screens/explore/widgets/readMoreText.dart';
+import 'package:lms_system/screens/course_detail/widgets/course_descriptions.dart';
+import 'package:lms_system/screens/explore_courses/widgets/enroll_course.dart';
+import 'package:lms_system/screens/shared/rating.dart';
+import 'package:lms_system/screens/shared/read_more_text.dart';
 
 class CourseDetail extends StatelessWidget {
   final Object? extra;
@@ -42,7 +42,7 @@ class CourseDetail extends StatelessWidget {
                 color: Colors.grey,
                 image: DecorationImage(
                   opacity: 0.2,
-                  image: AssetImage('${extra['imageLocation']}'),
+                  image: NetworkImage('${extra['imageLocation']}'),
                   fit: BoxFit.cover
                 )
               ),

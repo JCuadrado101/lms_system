@@ -58,7 +58,7 @@ class SelectCourses extends StatelessWidget {
                           borderRadius: BorderRadius.circular(10),
                         ),
                         elevation: 5,
-                        child: Image.asset(imageLocation),
+                        child: Image.network(imageLocation),
                       ),
                     ),
                     const SizedBox(height: 10),

@@ -118,6 +118,41 @@ class CourseEnroll extends StatelessWidget {
                       ),
                     ),
                   ),
+                  ListTile(
+                    mouseCursor: SystemMouseCursors.click,
+                    onTap: () {},
+                    title: const Padding(
+                      padding: EdgeInsets.symmetric(
+                          vertical: 5
+                      ),
+                      child: Text(
+                        'Free Course',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    trailing: Container(
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 15,
+                        vertical: 5,
+                      ),
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                            color: Colors.black
+                        ),
+                      ),
+                      child: const Text(
+                          'Free',
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold
+                          )
+                      ),
+                    ),
+                  ),
                 ],
               )
             ],

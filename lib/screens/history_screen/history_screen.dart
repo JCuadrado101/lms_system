@@ -10,7 +10,7 @@ class HistoryScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Your Courses',
+          'Certificates',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -49,25 +49,25 @@ class HistoryScreen extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 20),
-            const Text('Can\'t have a certificate without a course'),
+            const Text('Can\'t have a certificate without completing a course'),
             const SizedBox(height: 20),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5),
-                ),
-                primary: Colors.cyan,
-              ),
-              onPressed: () {},
-              child: const Text(
-                'Explore Courses',
-                style: TextStyle(
-                  fontSize: 15,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+            // ElevatedButton(
+            //   style: ElevatedButton.styleFrom(
+            //     padding: const EdgeInsets.symmetric(horizontal: 80, vertical: 15),
+            //     shape: RoundedRectangleBorder(
+            //       borderRadius: BorderRadius.circular(5),
+            //     ),
+            //     primary: Colors.cyan,
+            //   ),
+            //   onPressed: () {},
+            //   child: const Text(
+            //     'Explore Courses',
+            //     style: TextStyle(
+            //       fontSize: 15,
+            //       color: Colors.white,
+            //     ),
+            //   ),
+            // ),
           ],
         ),
       ),
