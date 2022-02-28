@@ -14,6 +14,7 @@ class Authentication extends StatelessWidget {
       // If the user is already signed-in, use it as initial data
       initialData: FirebaseAuth.instance.currentUser,
       builder: (context, snapshot) {
+        // print(snapshot.data);
         // User is not signed in
         if (!snapshot.hasData) {
           return SignInScreen(

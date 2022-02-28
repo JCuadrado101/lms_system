@@ -4,7 +4,7 @@ import 'package:lms_system/screens/explore_courses/explore_screen.dart';
 import '../../screens/authentication/controller/authentication.dart';
 import '../../screens/course_detail/course_detail.dart';
 import '../../screens/course_enroll/course_enroll.dart';
-import '../../screens/shared/settings.dart';
+import '../../screens/settings_screen/settings.dart';
 import '../../screens/home_page/home_page.dart';
 
 
