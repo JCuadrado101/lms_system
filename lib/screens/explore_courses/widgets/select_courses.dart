@@ -43,7 +43,7 @@ class SelectCourses extends StatelessWidget {
             );
       },
       child: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.all(15),
         child: Column(
           children: [
             Row(
@@ -51,8 +51,8 @@ class SelectCourses extends StatelessWidget {
                 Column(
                   children: [
                     SizedBox(
-                      width: 150,
-                      height: 150,
+                      width: 200,
+                      height: 200,
                       child: Card(
                         shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(10),
@@ -63,7 +63,7 @@ class SelectCourses extends StatelessWidget {
                     ),
                     const SizedBox(height: 10),
                     SizedBox(
-                      width: 150,
+                      width: 200,
                       child: Text(
                         title,
                         textAlign: TextAlign.center,
