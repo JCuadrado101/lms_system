@@ -2,12 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
-
 class Settings extends StatelessWidget {
   const Settings({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    User? user = FirebaseAuth.instance.currentUser;
+
     return SafeArea(
       child: Scaffold(
         appBar: AppBar(
@@ -26,12 +27,23 @@ class Settings extends StatelessWidget {
           backgroundColor: Colors.white,
         ),
         body: Center(
-          child: ElevatedButton(
-            onPressed: () async {
-              await FirebaseAuth.instance.signOut();
-              context.pushNamed('auth');
-            },
-            child: const Text('Sign Out'),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              ElevatedButton(
+                onPressed: () async {
+                  await FirebaseAuth.instance.signOut();
+                  context.pushNamed('auth');
+                },
+                child: const Text('Sign Out'),
+              ),
+              ElevatedButton(
+                onPressed: () async {
+                  user?.updateDisplayName('Test');
+                },
+                child: const Text('Click to add display name'),
+              ),
+            ],
           ),
         ),
       ),

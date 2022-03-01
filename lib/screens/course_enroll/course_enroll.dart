@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:lms_system/screens/course_enroll/widgets/completing_enrollment.dart';
+import 'package:lms_system/screens/course_enroll/widgets/offered_by.dart';
+
 
 class CourseEnroll extends StatelessWidget {
   final Object? extra;
@@ -11,6 +16,9 @@ class CourseEnroll extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final Map<String, dynamic> extra = this.extra as Map<String, dynamic>;
+    User? user = FirebaseAuth.instance.currentUser;
+    CollectionReference courses = FirebaseFirestore.instance.collection('courses');
+
     return SafeArea(
       child: Scaffold(
           appBar: AppBar(
@@ -28,136 +36,57 @@ class CourseEnroll extends StatelessWidget {
                 )
             ),
           ),
-          body: Column(
-            children: [
-              Container(
-                height: 200,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                    color: Colors.grey,
-                    image: DecorationImage(
-                        opacity: 0.2,
-                        image: NetworkImage('${extra['extra']['imageLocation']}'),
-                        fit: BoxFit.cover
-                    )
-                ),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+          body: FutureBuilder<QuerySnapshot>(
+            future: courses.get(),
+            builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+              final data = snapshot.data?.docs;
+              if (snapshot.hasError) {
+                return const Text('something went wrong');
+              }
+              if (!snapshot.hasError && snapshot.hasData) {
+                return Column(
                   children: [
-                    Text(
-                        '${extra['extra']['title']}',
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 22,
-                            fontWeight: FontWeight.bold
-                        )
-                    ),
-                    Align(
-                      alignment: Alignment.centerLeft,
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Text(
-                              'Offered by:',
-                              style: TextStyle(
-                                color: Colors.black,
-                                fontSize: 18,
-                              )
-                          ),
-                          const SizedBox(height: 5),
-                          Text(
-                              '${extra['extra']['offerBy']}',
-                              style: const TextStyle(
-                                  color: Colors.white,
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.bold
-                              )
-                          ),
-                        ],
-                      ),
-                    ),
+                    OfferedBy(extra: extra),
+                    Column(
+                      children: [
+                        const SizedBox(height: 20),
+                        CompletingEnrollment(
+                          purchaseTitle: 'Purchase Course',
+                          purchaseDescription: 'Pay for this course and receive a certificate when completed.',
+                          extra: extra,
+                          onPurchased: () {},
+                        ),
+                        CompletingEnrollment(
+                          purchaseTitle: 'Free',
+                          purchaseDescription: 'Enroll in this course for free.',
+                          onPurchased: () {
+                            FirebaseFirestore.instance
+                                .collection('users')
+                                .doc('B7VAXSGGVxe8jEfUQYKT')
+                                .update({
+                              'purchasedCourses': FieldValue.arrayUnion([
+                                {
+                                  'course': {
+                                    'course name': 'NUCA Dig Safe On Site',
+                                    'price': 'free',
+                                  },
+                                },
+                              ]),
+                            });
+                          },
+                        ),
+                      ],
+                    )
                   ],
-                ),
-              ),
-              Column(
-                children: [
-                  const SizedBox(height: 20),
-                  ListTile(
-                    mouseCursor: SystemMouseCursors.click,
-                    onTap: () {},
-                    title: const Padding(
-                      padding: EdgeInsets.symmetric(
-                        vertical: 5
-                      ),
-                      child: Text(
-                        'Purchase Course',
-                        style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    subtitle: const Text('Pay for this course and receive a certificate when completed.'),
-                    trailing: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              color: Colors.black
-                          ),
-                      ),
-                      child: Text(
-                          '${extra['extra']['price']}',
-                          style: const TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold
-                          )
-                      ),
-                    ),
-                  ),
-                  ListTile(
-                    mouseCursor: SystemMouseCursors.click,
-                    onTap: () {},
-                    title: const Padding(
-                      padding: EdgeInsets.symmetric(
-                          vertical: 5
-                      ),
-                      child: Text(
-                        'Free Course',
-                        style: TextStyle(
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ),
-                    trailing: Container(
-                      padding: const EdgeInsets.symmetric(
-                        horizontal: 15,
-                        vertical: 5,
-                      ),
-                      decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Colors.black
-                        ),
-                      ),
-                      child: const Text(
-                          'Free',
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold
-                          )
-                      ),
-                    ),
-                  ),
-                ],
-              )
-            ],
+                );
+              }
+              return const Center(
+                child: CircularProgressIndicator(),
+              );
+            },
           )
       ),
     );
   }
 }
+
