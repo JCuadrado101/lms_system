@@ -4,6 +4,8 @@ import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../explore_courses/widgets/select_courses.dart';
+
 
 
 class ActiveCourses extends StatefulWidget {
@@ -14,8 +16,8 @@ class ActiveCourses extends StatefulWidget {
 }
 
 class _ActiveCoursesState extends State<ActiveCourses> {
-  User? currentUser = FirebaseAuth.instance.currentUser;
-  CollectionReference users = FirebaseFirestore.instance.collection('users');
+ final currentUser = FirebaseAuth.instance.currentUser?.uid;
+  CollectionReference courses = FirebaseFirestore.instance.collection('courses');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,23 +45,61 @@ class _ActiveCoursesState extends State<ActiveCourses> {
       ),
       body: Center(
         child: FutureBuilder<QuerySnapshot>(
-          future: users.get(),
+          future: courses.get(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             final data = snapshot.data?.docs;
-            print(data?.length);
+            print(data?[0]['paidUsers']['uid']);
             if (snapshot.hasError) {
               return const Text("Something went wrong");
             }
             if (!snapshot.hasError && snapshot.hasData) {
               return ListView.builder(
                 shrinkWrap: true,
-                // itemCount: data.length,
+                itemCount: data?.length,
                 itemBuilder: (context, index) {
-                  return Row(
+                  if (currentUser.toString() == data![index]['paidUsers']['uid'].toString()) {
+                    return Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SelectCourses(
+                          imageLocation: data[index]['image']!,
+                          title: data[index]['title'],
+                          rating: data[index]['rating'],
+                          count: data[index]['count'],
+                          description: data[index]['description'],
+                          offerBy: data[index]['offerBy'],
+                          price: data[index]['price'],
+                          inPersonTime: data[index]['inPersonTime'],
+                          goRouteName: 'courseDetail',
+                        ),
+                      ],
+                    );
+                  }
+                 else {
+                  Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Lottie.asset(
+                          'assets/courseNotFound.json',
+                          width: 200,
+                          repeat: false
+                      ),
+                      const SizedBox(height: 20),
+                      const Text(
+                        'No Active Courses',
+                        style: TextStyle(
+                          fontSize: 20,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
+                      const SizedBox(height: 20),
+                      const Text('You aren\'t enrolled in any courses yet.'),
+                      const SizedBox(height: 20),
                     ],
                   );
+                 }
+                  return Container();
                 },
               );
             }
@@ -71,25 +111,3 @@ class _ActiveCoursesState extends State<ActiveCourses> {
   }
 }
 
-// Column(
-// mainAxisAlignment: MainAxisAlignment.center,
-// children: [
-// Lottie.asset(
-// 'assets/courseNotFound.json',
-// width: 200,
-// repeat: false
-// ),
-// const SizedBox(height: 20),
-// const Text(
-// 'No Active Courses',
-// style: TextStyle(
-// fontSize: 20,
-// fontWeight: FontWeight.bold,
-// color: Colors.black,
-// ),
-// ),
-// const SizedBox(height: 20),
-// const Text('You aren\'t enrolled in any courses yet.'),
-// const SizedBox(height: 20),
-// ],
-// ),
