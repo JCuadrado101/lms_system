@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../explore_courses/explore_screen.dart';
 import '../history_screen//history_screen.dart';
-import '../active_courses/active_courses.dart';
+import '../active_courses/controller/active_courses.dart';
 import '../message_board/message_board.dart';
 
 class HomePage extends StatefulWidget {

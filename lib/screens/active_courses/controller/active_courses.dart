@@ -1,12 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
+import 'package:lms_system/screens/active_courses/widgets/purchased_courses.dart';
 import 'package:lottie/lottie.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-
-import '../explore_courses/widgets/select_courses.dart';
-
-
 
 class ActiveCourses extends StatefulWidget {
   const ActiveCourses({Key? key}) : super(key: key);
@@ -23,7 +20,7 @@ class _ActiveCoursesState extends State<ActiveCourses> {
     return Scaffold(
       appBar: AppBar(
         title: const Text(
-          'Your Courses',
+          'Purchased Active Courses',
           style: TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
@@ -48,7 +45,6 @@ class _ActiveCoursesState extends State<ActiveCourses> {
           future: courses.get(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
             final data = snapshot.data?.docs;
-            print(data?[0]['paidUsers']['uid']);
             if (snapshot.hasError) {
               return const Text("Something went wrong");
             }
@@ -61,16 +57,15 @@ class _ActiveCoursesState extends State<ActiveCourses> {
                     return Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        SelectCourses(
+                        PurchasedCourses(
                           imageLocation: data[index]['image']!,
                           title: data[index]['title'],
-                          rating: data[index]['rating'],
                           count: data[index]['count'],
                           description: data[index]['description'],
                           offerBy: data[index]['offerBy'],
                           price: data[index]['price'],
                           inPersonTime: data[index]['inPersonTime'],
-                          goRouteName: 'courseDetail',
+                          goRouteName: 'purchasedCourseDetail',
                         ),
                       ],
                     );
