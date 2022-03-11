@@ -5,6 +5,7 @@ import 'package:lms_system/screens/purchased_course_detail/purchased_course_deta
 import '../../screens/authentication/controller/authentication.dart';
 import '../../screens/course_detail/course_detail.dart';
 import '../../screens/course_enroll/course_enroll.dart';
+import '../../screens/course_videos/course_videos.dart';
 import '../../screens/settings_screen/settings.dart';
 import '../../screens/home_page/home_page.dart';
 
@@ -65,6 +66,14 @@ List<GoRoute> mobileBasedRoutes() {
       pageBuilder: (context, state) => MaterialPage(
         key: state.pageKey,
         child: PurchasedCourseDetail(extra: state.extra),
+      ),
+    ),
+    GoRoute(
+      name: 'courseVideos',
+      path: '/courseVideos',
+      pageBuilder: (context, state) => MaterialPage(
+        key: state.pageKey,
+        child: const CourseVideos(),
       ),
     )
   ];

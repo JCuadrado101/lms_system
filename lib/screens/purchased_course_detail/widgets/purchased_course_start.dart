@@ -9,17 +9,12 @@ class PurchaseCourseStart extends StatelessWidget {
     required this.extra,
   }) : super(key: key);
 
+
   @override
   Widget build(BuildContext context) {
-    final Map<String, dynamic> extra = this.extra as Map<String, dynamic>;
     return GestureDetector(
       onTap: () {
-        context.pushNamed(
-          'courseEnroll',
-          extra: {
-            'extra': extra,
-          },
-        );
+        context.pushNamed('courseVideos');
       },
       child: Container(
         alignment: Alignment.center,

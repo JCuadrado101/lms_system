@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import '../explore_courses/explore_screen.dart';
 import '../history_screen//history_screen.dart';
 import '../active_courses/controller/active_courses.dart';
@@ -28,6 +29,10 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return SafeArea(
       child: Scaffold(
         body: Center(

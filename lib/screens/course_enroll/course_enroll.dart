@@ -39,40 +39,33 @@ class CourseEnroll extends StatelessWidget {
           body: FutureBuilder<QuerySnapshot>(
             future: courses.get(),
             builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
-              final data = snapshot.data?.docs;
               if (snapshot.hasError) {
                 return const Text('something went wrong');
               }
               if (!snapshot.hasError && snapshot.hasData) {
+                final data = snapshot.data?.docs as List;
+                print(data);
                 return Column(
                   children: [
                     OfferedBy(extra: extra),
                     Column(
                       children: [
                         const SizedBox(height: 20),
-                        CompletingEnrollment(
-                          purchaseTitle: 'Purchase Course',
-                          purchaseDescription: 'Pay for this course and receive a certificate when completed.',
-                          extra: extra,
-                          onPurchased: () {},
-                        ),
+                        // CompletingEnrollment(
+                        //   purchaseTitle: 'Purchase Course',
+                        //   purchaseDescription: 'Pay for this course and receive a certificate when completed.',
+                        //   extra: extra,
+                        //   onPurchased: () {},
+                        // ),
                         CompletingEnrollment(
                           purchaseTitle: 'Free',
                           purchaseDescription: 'Enroll in this course for free.',
                           onPurchased: () {
-                            FirebaseFirestore.instance
-                                .collection('users')
-                                .doc('B7VAXSGGVxe8jEfUQYKT')
-                                .update({
-                              'purchasedCourses': FieldValue.arrayUnion([
-                                {
-                                  'course': {
-                                    'course name': 'NUCA Dig Safe On Site',
-                                    'price': 'free',
-                                  },
-                                },
-                              ]),
-                            });
+                           courses.doc(extra['courseId']).update({
+                              'paidUsers': FieldValue.arrayUnion([user!.uid])
+                            })
+                             .then((value) => print("User Updated"))
+                             .catchError((error) => print("Failed to update user: $error"));
                           },
                         ),
                       ],

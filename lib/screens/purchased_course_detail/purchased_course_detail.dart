@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_router/go_router.dart';
 import 'package:lms_system/screens/course_detail/widgets/course_descriptions.dart';
 import 'package:lms_system/screens/purchased_course_detail/widgets/purchased_course_start.dart';
@@ -14,6 +15,10 @@ class PurchasedCourseDetail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     final Map<String, dynamic> extra = this.extra as Map<String, dynamic>;
     return SafeArea(
       child: Scaffold(
