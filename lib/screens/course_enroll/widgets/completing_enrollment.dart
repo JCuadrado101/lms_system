@@ -42,8 +42,7 @@ class CompletingEnrollment extends StatelessWidget {
               color: Colors.black
           ),
         ),
-        child: Text(
-            '${extra?['extra']['price'] ?? 'Free'}',
+        child: Text( '\$' '${extra?['extra']['price'] ?? 'Free'}',
             style: const TextStyle(
                 color: Colors.black,
                 fontSize: 18,
